@@ -51,18 +51,22 @@ WHERE length  > (
 ```
 sql-запрос для задания 2
 
+
 SELECT 
-	MONTH (p.payment_date) pay_month, 
-	sum(p.amount) sum_amount, 
-	count(r.rental_id) rent_count  
-from 
+	YEAR (payment_date) pay_year, 
+	MONTH (payment_date) pay_month, 
+	SUM(p.amount) sum_amount, 
+	COUNT(r.rental_id)  
+FROM 
 	payment p 
-join rental r on r.rental_id = p.rental_id 
-group by 
-	pay_month 
-order by 
-	sum_amount DESC 
-limit 1;
+JOIN 
+	rental r ON r.rental_id = p.rental_id 
+GROUP by 
+	pay_year, pay_month
+ORDER by 
+	sum_amount DESC
+LIMIT 1;
+
 
 ```
 
